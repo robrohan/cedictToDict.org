@@ -1,0 +1,26 @@
+
+$ make download
+
+$ make DICT_TYPE=simplfied
+$ sudo make DICT_TYPE=simplfied install
+
+$ make DICT_TYPE=pinyin
+$ sudo make DICT_TYPE=pinyin install
+
+$ make DICT_TYPE=english
+$ sudo make DICT_TYPE=english install
+
+$ sudo dictdconfig -w
+$ sudo /etc/init.d/dictd restart
+
+==================================
+= Others
+==================================
+
+$ make test
+
+$ make DICT_TYPE=simplfied dist
+$ make DICT_TYPE=pinyin dist
+$ make DICT_TYPE=english dist
+
+$ make clean
