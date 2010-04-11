@@ -1,0 +1,58 @@
+
+What is this
+============
+The main goal of this project is to provide a way to define Mandarin words (search via character, pinyin or English) using the default Ubuntu (Gnome) dictionary program.  It is attempting to do this by creating a [dict.org][dictorg] compatible dictionary. 
+
+This code takes a dictionary in the [CC-CEDICT][cedict] format, and makes it into a format that the dict.org server can understand.  The dict.org format can then be used with the dictd server to create on-line search-able dictionaries.
+
+The bulk of this code is written in Ruby.
+
+
+Prerequisites
+=============
+
+To run this code you will need the following applications (aside from the usual make, ruby, etc):
+
+   dictfmt
+   dictdconfig (if you want to run a local testing server)
+   dictd (if you want to run a local testing server)
+   wget
+
+
+Basic Usage
+===========
+
+First, you need to download the latest [CC-CEDICT][cedict] dictionary:
+
+	$ make download
+
+This will download and unzip the latest CC-CEDICT dictionary into the input folder.
+
+You can then build the dictionaries.  All dictionaries are created the way with the make file, you simply pass in *DICT_TYPE* to create the different versions.  For example, to create the *pinyin* version you would do the following:
+
+	$ make DICT_TYPE=pinyin
+
+Once the dictionary is made, you can either install it locally, or zip it up for distribution.  The latter is simply:
+
+	$ make DICT_TYPE=pinyin dist
+
+Which will make a zip file in the output directory.  If you would like to install it locally you can do:
+
+	$ make DICT_TYPE=pinyin install
+
+If this is the first time you are installing the dictionary, you will need to do create a new configuration file (*dictdconfig -w*) and restart the dict server (*/ect/init.d/dictd restart*).
+
+Valid settings for *DICT_TYPE* are *simplified*, *pinyin*, and *english*.
+
+
+Credits
+=======
+The [CC-CEDICT][cedict] is a community based effort to create a free Chinese dictionary.  There have been many contributors to that project - see [their site][cedit] for details.  The dictionary is released under a [Creative Commons License][ccasa].
+
+[Rob Rohan][rob] wrote the Ruby code, makefiles, etc (for better or worse). And it is released under the GPL version 3.
+
+
+[dictorg]: http://www.dict.org/bin/Dict
+[cedict]: http://cc-cedict.org/wiki/ "CC-CEDICT Home"
+[ccasa]: http://creativecommons.org/licenses/by-sa/3.0/
+[rob]: http://robrohan.com
